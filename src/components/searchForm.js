@@ -15,7 +15,7 @@ class SearchForm extends Component {
       location: '',
       startDate: moment(),
       endDate: moment(),
-      startHour: '0:00', //change this so if someone doesnt change it, it still works
+      startHour: '0:00',
       endHour: '0:00',
     };
   }
@@ -56,7 +56,6 @@ class SearchForm extends Component {
       endHour: hour
     });
   }
-
 
   submit() {
     debugger;
