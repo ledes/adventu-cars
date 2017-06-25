@@ -1,3 +1,44 @@
-.form-group{
+@import 'constants';
+
+.form-group {
+  width: 100%;
   display: flex;
+  label {
+    color: $box-font-color;
+  }
+  .location-group{
+    text-align: left;
+    flex-grow: 3;
+  }
+  .date-group {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    input {
+      height: 24px;
+      width: 70px;
+      margin-right: 2px;
+      padding: .1em 0.5em;
+      background-color: $selectors-color;
+      border-width: 1px;
+      border-style: solid;
+      border-color: $selectors-border-color;
+      border-radius: $selectors-border-radius;
+      outline: none;
+      cursor: pointer;
+    }
+  }
+  .submit {
+    text-align: left;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    .fa {
+      cursor: pointer;
+      font-size: 2em;
+      margin-bottom: 2px;
+    }
+  }
 }

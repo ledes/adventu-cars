@@ -1,0 +1,8 @@
+@import "constants";
+
+.selectHour {
+  height: 30px;
+  border-radius: $selectors-border-radius;
+  outline: none;
+  cursor: pointer
+}

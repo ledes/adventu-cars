@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import '../styles/time-picker.scss';
 
 
 const hours = [
@@ -21,7 +22,9 @@ class TimePicker extends Component {
 
   render() {
     return (
-      <select value={this.props.selectedHour} onChange={this.onTimeChanged.bind(this)}>
+      <select className='selectHour'
+              value={this.props.selectedHour}
+              onChange={this.onTimeChanged.bind(this)}>
           {this.renderOptions()}
       </select>
     );

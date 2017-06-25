@@ -13,7 +13,7 @@ class SearchForm extends Component {
 
     this.state = {
       startDate: moment(),
-      endDate: null,
+      endDate: moment(),
       startHour: '0:00', //change this so if someone doesnt change it, it still works
       endHour: '0:00',
     };
@@ -50,30 +50,36 @@ class SearchForm extends Component {
       <div className="form-group">
         <div className="location-group">
           <label>Where</label>
-        </div>
-        <div className="start-date-group">
-          <label>When</label>
           <Geosuggest />
-          <DatePicker
-            minDate={moment()}
-            selected={this.state.startDate}
-            onChange={this.handleStartDateChange.bind(this)}/>
-          <TimePicker
-            selectedHour={this.state.startHour}
-            onChangeHour={this.handleStartHourChange.bind(this)}/>
         </div>
-        <div className="end-date-group">
+        <div className="date-group">
+          <label>When</label>
+          <div>
+            <DatePicker
+              minDate={moment()}
+              startDate={this.state.startDate}
+              endDate={this.state.endDate}
+              selected={this.state.startDate}
+              onChange={this.handleStartDateChange.bind(this)}/>
+            <TimePicker
+              selectedHour={this.state.startHour}
+              onChangeHour={this.handleStartHourChange.bind(this)}/>
+          </div>
+        </div>
+        <div className="date-group">
           <label>Until</label>
-          <DatePicker
-            placeholderText="Click the ending date"
-            minDate={moment()}
-            startDate={this.state.startDate}
-            endDate={this.state.endDate}
-            selected={this.state.endDate}
-            onChange={this.handleEndDateChange.bind(this)}/>
-          <TimePicker
-            selectedHour={this.state.endHour}
-            onChangeHour={this.handleEndHourChange.bind(this)}/>
+          <div>
+            <DatePicker
+              placeholderText="Click the ending date"
+              minDate={this.state.startDate}
+              startDate={this.state.startDate}
+              endDate={this.state.endDate}
+              selected={this.state.endDate}
+              onChange={this.handleEndDateChange.bind(this)}/>
+            <TimePicker
+              selectedHour={this.state.endHour}
+              onChangeHour={this.handleEndHourChange.bind(this)}/>
+          </div>
         </div>
         <div className="submit">
           <i className="fa fa-search" aria-hidden="true"></i>

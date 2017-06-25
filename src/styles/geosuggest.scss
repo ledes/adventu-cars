@@ -1,3 +1,4 @@
+@import 'constants';
 
 /**
  * The geosuggest module
@@ -7,17 +8,21 @@
   font-size: 18px;
   font-size: 1rem;
   position: relative;
-  width: 50%;
-  margin: 1em auto;
+  width: 80%;
   text-align: left;
 }
 .geosuggest__input {
-  width: 100%;
-  border: 2px solid transparent;
-  box-shadow: 0 0 1px #3d464d;
+  font-family: $selectors-font-family;
+  width: 90%;
+  height: 17px;
+  border-radius: $selectors-border-radius;
   padding: .5em 1em;
-  -webkit-transition: border 0.2s, box-shadow 0.2s;
-          transition: border 0.2s, box-shadow 0.2s;
+  background-color: rgb(248, 248, 248);
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(166, 166, 166);
+  outline: none;
+  cursor: pointer;
 }
 .geosuggest__input:focus {
   border-color: #267dc0;
