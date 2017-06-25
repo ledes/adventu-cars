@@ -12,6 +12,7 @@ class SearchForm extends Component {
     super(props)
 
     this.state = {
+      location: '',
       startDate: moment(),
       endDate: moment(),
       startHour: '0:00', //change this so if someone doesnt change it, it still works
@@ -19,6 +20,18 @@ class SearchForm extends Component {
     };
   }
   // Actions
+
+  handleLocationChange(location) {
+    this.setState({
+      location: location
+    });
+  }
+
+  onSuggestLocationSelect(location) {
+    this.setState({
+      location: location.gmaps.formatted_address
+    });
+  }
 
   handleStartDateChange(date) {
     this.setState({
@@ -43,6 +56,11 @@ class SearchForm extends Component {
       endHour: hour
     });
   }
+
+
+  submit() {
+    debugger;
+  }
   // Render
 
   render() {
@@ -50,7 +68,11 @@ class SearchForm extends Component {
       <div className="form-group">
         <div className="location-group">
           <label>Where</label>
-          <Geosuggest />
+          <Geosuggest
+          initialValue={this.state.location}
+          placeholder={'Enter city, airport or address'}
+          onChange={this.handleLocationChange.bind(this)}
+          onSuggestSelect={this.onSuggestLocationSelect.bind(this)}/>
         </div>
         <div className="date-group">
           <label>When</label>
@@ -81,7 +103,8 @@ class SearchForm extends Component {
               onChangeHour={this.handleEndHourChange.bind(this)}/>
           </div>
         </div>
-        <div className="submit">
+        <div className="submit"
+             onClick={this.submit.bind(this)} >
           <i className="fa fa-search" aria-hidden="true"></i>
         </div>
       </div>
