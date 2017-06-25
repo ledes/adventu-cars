@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
+import SearchForm from './components/search-form';
+import './styles/App.css';
 
 class App extends Component {
   constructor(props) {
@@ -16,6 +17,9 @@ class App extends Component {
         <p className="App-intro">
           Rent a car and start a new adventure
         </p>
+        <div className="main-container">
+          <SearchForm/>
+        </div>
       </div>
     );
   }

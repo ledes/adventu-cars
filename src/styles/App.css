@@ -1,0 +1,23 @@
+.App {
+  text-align: center;
+}
+
+.App-intro {
+  font-size: 40px;
+  font-family: Freight, HoeflerText-Black, Times New Roman, serif;
+  color: #FFFFFF;
+}
+
+.main-container {
+  border: solid #D3DAE3 1px;
+  background: #FFFFFF;
+  height: 40%;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+}
