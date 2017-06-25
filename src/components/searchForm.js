@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
-import TimePicker from '../components/timePicker'
+import Geosuggest from 'react-geosuggest';
+import TimePicker from '../components/timePicker';
 import '../styles/search-form.scss';
 import 'react-datepicker/dist/react-datepicker.css';
+import '../styles/geosuggest.scss'
 
 class SearchForm extends Component {
   constructor(props) {
@@ -51,6 +53,7 @@ class SearchForm extends Component {
         </div>
         <div className="start-date-group">
           <label>When</label>
+          <Geosuggest />
           <DatePicker
             minDate={moment()}
             selected={this.state.startDate}

@@ -16,7 +16,6 @@ class TimePicker extends Component {
   }
 
   onTimeChanged(event) {
-    debugger;
     this.props.onChangeHour(event.target.value);
   }
 
