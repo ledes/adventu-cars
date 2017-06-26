@@ -93,7 +93,7 @@ class SearchForm extends Component {
           <label>Until</label>
           <div>
             <DatePicker
-              placeholderText="Click the ending date"
+              placeholderText="mm/dd/yy"
               minDate={this.props.startDate}
               startDate={this.props.startDate}
               endDate={this.props.endDate}
@@ -116,7 +116,10 @@ class SearchForm extends Component {
 SearchForm.propTypes = {
   dest: PropTypes.string.isRequired,
   startDate: PropTypes.object.isRequired,
-  endDate: PropTypes.object.isRequired,
+  endDate: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string
+  ]),
   pickUpTime: PropTypes.string.isRequired,
   dropOffTime: PropTypes.string.isRequired,
   onAction: PropTypes.func.isRequired

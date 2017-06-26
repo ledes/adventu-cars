@@ -13,7 +13,7 @@ class App extends Component {
     this.state = {
       dest: '',
       startDate: moment(),
-      endDate: moment(),
+      endDate: '',
       pickUpTime: '0:00',
       dropOffTime: '0:00',
       result: []
@@ -50,14 +50,15 @@ class App extends Component {
   }
 
   findCars(params) {
-    const url = 'https://api.hotwire.com/v1/search/car';
+    const url = 'https://api.hotwire.com/v1/search/car?';
     const apikey = 'ybkwarw5p7kef79m3wvegmxg';
     const formattedUrl = this.formatUrl(url, { ...params, apikey });
 
     $.ajax({
       url: formattedUrl,
       type: 'GET',
-      dataType: 'json',
+      crossDomain: true,
+      dataType: 'jsonp',
       success: function(response) {
         debugger;
       },
@@ -68,6 +69,14 @@ class App extends Component {
   }
 
   formatUrl(url, params) {
+    let str = url;
+    _.forEach(params, (value, key) => {
+      if (key === 'startDate' || key === 'endDate') {
+        str += `&${key}=${value.format('MM/DD/YY')}`
+      } else {
+        str += `&${key}=${value.replace(/\s+/g, '')}`
+      }
+    })
     debugger;
   }
 
