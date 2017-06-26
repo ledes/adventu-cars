@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SearchForm from './components/searchForm';
+import CarList from './components/carList';
 import './styles/App.scss';
 import moment from 'moment';
 import $ from 'jquery';
@@ -17,7 +18,7 @@ class App extends Component {
       pickUpTime: '0:00',
       dropOffTime: '0:00',
       loading: false,
-      result: [],
+      cars: [],
       errors: []
     };
   }
@@ -44,6 +45,9 @@ class App extends Component {
         let params = _.pickBy(this.state, (value, key) => {
           return _.includes(paramKeys, key);
         });
+        if (this.state.cars.length > 0) {
+          this.setState({ cars: [], errors: []});
+        }
         this.findCars(params);
         break;
       default:
@@ -66,20 +70,42 @@ class App extends Component {
       success: function(response) {
         //Any response with a StatusCode of "0" is a successful request
         if (response.StatusCode === '0') {
+          let formattedCars = this.formatCars(response.Result, response.MetaData.CarMetaData.CarTypes);
           this.setState({
-            result: response.Result,
+            cars: formattedCars,
             loading: false
           });
         } else {
-          this.setState({ loading: false });
-          //TODO display errors in ui
+          let formattedErrors = this.formatErrors(response);
+          this.setState({
+            errors: formattedErrors,
+            loading: false
+          });
         }
       },
       error: function(jqXHR, textStatus, errorThrown) {
-        this.setState({ loading: false });
-        //TODO display errors in ui
+        this.setState({
+          errors: ['Something went wrong, please try again later'],
+          loading: false
+        });
       },
     })
+  }
+
+
+  formatErrors(response) {
+    let errors = [];
+    let defaultErrorMessage = 'Something went wrong, please try again later';
+    if (_.isObject(response.Errors)) {
+      errors.push(response.Errors.Error.ErrorMessage);
+    } else if (_.isArray(response.Errors)) {
+      _.forEach(response.Errors, error => {
+        errors.push(error.Error.ErrorMessage);
+      });
+    } else {
+      errors.push(defaultErrorMessage);
+    }
+    return errors;
   }
 
   formatUrl(url, params) {
@@ -92,6 +118,20 @@ class App extends Component {
       }
     });
     return str;
+  }
+
+  formatCars(cars, metadata) {
+    return _.map(cars, car => {
+      let meta = _.find(metadata, carType => { return carType.CarTypeCode === car.CarTypeCode });
+      return {
+        resultId: car.ResultId,
+        deepLink: car.DeepLink,
+        dailyRate: car.DailyRate,
+        totalPrice: car.TotalPrice,
+        possibleModels: meta.PossibleModels,
+        typicalSeating: meta.TypicalSeating
+      };
+    })
   }
 
   render() {
@@ -111,6 +151,7 @@ class App extends Component {
             onAction={this.onAction.bind(this)}
             />
         </div>
+        {this.state.cars.length > 0 || this.state.errors.length > 0 ? <CarList errors={this.state.errors} cars={this.state.cars} /> : null }
       </div>
     );
   }

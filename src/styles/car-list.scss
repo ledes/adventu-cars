@@ -1,0 +1,22 @@
+@import 'constants';
+
+.car-list {
+  margin-top: 10px;
+  border-radius: 25px;
+  @include text-box;
+}
+
+.error-list {
+  list-style-type: none;
+  text-align: left;
+  width: 90%;
+  background-color: #fae8e8;
+  border-color: #f3c6c6;
+  color: #D73F3F;
+  padding: 15px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  .error-message {
+    font-size: 14px;
+  }
+}

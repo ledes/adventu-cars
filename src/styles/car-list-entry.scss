@@ -1,0 +1,45 @@
+@import 'constants';
+
+.car-info {
+  width: 95%;
+  padding: 20px;
+  margin-bottom: 10px;
+  border: 2px solid $text-box-border-color;
+  border-radius: 25px;
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+  .sub-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    h3 {
+      margin: 0px;
+    }
+    a {
+      font-size: 25px;
+      text-decoration: none;
+    }
+    .link-column  {
+      margin-left: 20px;
+      align-items: center;
+      .fa {
+        flex-grow: 1;
+        outline: 0;
+        color: $search-icon-color;
+      }
+    }
+  }
+  .car-description {
+    display: flex;
+    flex-direction: row;
+    .type-column {
+      display: flex;
+      flex-grow: 3;
+    }
+    .price-column {
+      display: flex;
+      flex-grow: 2;
+    }
+  }
+}
