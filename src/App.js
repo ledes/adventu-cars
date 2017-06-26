@@ -16,7 +16,9 @@ class App extends Component {
       endDate: '',
       pickUpTime: '0:00',
       dropOffTime: '0:00',
-      result: []
+      loading: false,
+      result: [],
+      errors: []
     };
   }
 
@@ -50,20 +52,32 @@ class App extends Component {
   }
 
   findCars(params) {
-    const url = 'https://api.hotwire.com/v1/search/car?';
-    const apikey = 'ybkwarw5p7kef79m3wvegmxg';
-    const formattedUrl = this.formatUrl(url, { ...params, apikey });
-
+    const url = process.env.REACT_APP_HOTWIRE_API_URL + '/search/car?';
+    const apiKey = process.env.REACT_APP_HOTWIRE_API_KEY;
+    const format = 'jsonp';
+    const formattedUrl = this.formatUrl(url, { ...params, format, apiKey });
+    this.setState({ loading: true });
     $.ajax({
       url: formattedUrl,
       type: 'GET',
       crossDomain: true,
       dataType: 'jsonp',
+      context: this,
       success: function(response) {
-        debugger;
+        //Any response with a StatusCode of "0" is a successful request
+        if (response.StatusCode === '0') {
+          this.setState({
+            result: response.Result,
+            loading: false
+          });
+        } else {
+          this.setState({ loading: false });
+          //TODO display errors in ui
+        }
       },
       error: function(jqXHR, textStatus, errorThrown) {
-        debugger;
+        this.setState({ loading: false });
+        //TODO display errors in ui
       },
     })
   }
@@ -72,12 +86,12 @@ class App extends Component {
     let str = url;
     _.forEach(params, (value, key) => {
       if (key === 'startDate' || key === 'endDate') {
-        str += `&${key}=${value.format('MM/DD/YY')}`
+        str += `&${key.toLowerCase()}=${encodeURIComponent(value.format('MM/DD/YYYY'))}`;
       } else {
-        str += `&${key}=${value.replace(/\s+/g, '')}`
+        str += `&${key.toLowerCase()}=${encodeURIComponent(value.replace(/\s/g, ''))}`;
       }
-    })
-    debugger;
+    });
+    return str;
   }
 
   render() {
@@ -88,6 +102,7 @@ class App extends Component {
         </p>
         <div className="main-container">
           <SearchForm
+            loading={this.state.loading}
             dest={this.state.dest}
             startDate={this.state.startDate}
             endDate={this.state.endDate}

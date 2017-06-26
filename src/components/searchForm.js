@@ -59,12 +59,22 @@ class SearchForm extends Component {
   }
 
   submit() {
-    let payload = { action: "SUBMIT" };
-    this.props.onAction(payload);
+    if (this.canSubmit()) {
+      let payload = { action: "SUBMIT" };
+      this.props.onAction(payload);
+    }
   }
+
+  canSubmit() {
+    let props = this.props;
+    return props.dest !== '' && props.endDate !== '' && !props.loading;
+  }
+
+
   // Render
 
   render() {
+    let submitClass = this.canSubmit() ? '' : 'block-submit';
     return (
       <div className="form-group">
         <div className="dest-group">
@@ -104,7 +114,7 @@ class SearchForm extends Component {
               onChangeHour={this.handleDropOffTimeChange.bind(this)}/>
           </div>
         </div>
-        <div className="submit"
+        <div className={"submit " + submitClass }
              onClick={this.submit.bind(this)} >
           <i className="fa fa-search" aria-hidden="true"></i>
         </div>
@@ -114,6 +124,7 @@ class SearchForm extends Component {
 }
 
 SearchForm.propTypes = {
+  loading: PropTypes.bool.isRequired,
   dest: PropTypes.string.isRequired,
   startDate: PropTypes.object.isRequired,
   endDate: PropTypes.oneOfType([

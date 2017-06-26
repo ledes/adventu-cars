@@ -32,13 +32,18 @@
   .submit {
     text-align: left;
     flex-grow: 1;
+    opacity: 0.8;
     display: flex;
+    cursor: pointer;
     justify-content: center;
     align-items: flex-end;
     .fa {
-      cursor: pointer;
       font-size: 2em;
       margin-bottom: 2px;
     }
+  }
+  .block-submit {
+    opacity: 0.1;
+    cursor: auto;
   }
 }
