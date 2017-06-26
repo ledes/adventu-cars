@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 import Geosuggest from 'react-geosuggest';
 import TimePicker from '../components/timePicker';
 import '../styles/search-form.scss';
@@ -8,57 +9,58 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../styles/geosuggest.scss'
 
 class SearchForm extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      location: '',
-      startDate: moment(),
-      endDate: moment(),
-      startHour: '0:00',
-      endHour: '0:00',
-    };
-  }
-  // Actions
 
   handleLocationChange(location) {
-    this.setState({
-      location: location
-    });
+    let payload = {
+      action: "LOCATION_CHANGED",
+      value: location
+    };
+    this.props.onAction(payload);
   }
 
   onSuggestLocationSelect(location) {
-    this.setState({
-      location: location.gmaps.formatted_address
-    });
+    let payload = {
+      action: "LOCATION_CHANGED",
+      value: location.gmaps.formatted_address
+    };
+    this.props.onAction(payload);
   }
 
   handleStartDateChange(date) {
-    this.setState({
-      startDate: date
-    });
+    let payload = {
+      action: "START_DATE_CHANGED",
+      value: date
+    };
+    this.props.onAction(payload);
   }
 
   handleEndDateChange(date) {
-    this.setState({
-      endDate: date
-    });
+    let payload = {
+      action: "END_DATE_CHANGED",
+      value: date
+    };
+    this.props.onAction(payload);
   }
 
   handleStartHourChange(hour) {
-    this.setState({
-      startHour: hour
-    });
+    let payload = {
+      action: "START_HOUR_CHANGED",
+      value: hour
+    };
+    this.props.onAction(payload);
   }
 
   handleEndHourChange(hour) {
-    this.setState({
-      endHour: hour
-    });
+    let payload = {
+      action: "END_HOUR_CHANGED",
+      value: hour
+    };
+    this.props.onAction(payload);
   }
 
   submit() {
-    debugger;
+    let payload = { action: "SUBMIT" };
+    this.props.onAction(payload);
   }
   // Render
 
@@ -68,7 +70,7 @@ class SearchForm extends Component {
         <div className="location-group">
           <label>Where</label>
           <Geosuggest
-          initialValue={this.state.location}
+          initialValue={this.props.location}
           placeholder={'Enter city, airport or address'}
           onChange={this.handleLocationChange.bind(this)}
           onSuggestSelect={this.onSuggestLocationSelect.bind(this)}/>
@@ -78,12 +80,12 @@ class SearchForm extends Component {
           <div>
             <DatePicker
               minDate={moment()}
-              startDate={this.state.startDate}
-              endDate={this.state.endDate}
-              selected={this.state.startDate}
+              startDate={this.props.startDate}
+              endDate={this.props.endDate}
+              selected={this.props.startDate}
               onChange={this.handleStartDateChange.bind(this)}/>
             <TimePicker
-              selectedHour={this.state.startHour}
+              selectedHour={this.props.startHour}
               onChangeHour={this.handleStartHourChange.bind(this)}/>
           </div>
         </div>
@@ -92,13 +94,13 @@ class SearchForm extends Component {
           <div>
             <DatePicker
               placeholderText="Click the ending date"
-              minDate={this.state.startDate}
-              startDate={this.state.startDate}
-              endDate={this.state.endDate}
-              selected={this.state.endDate}
+              minDate={this.props.startDate}
+              startDate={this.props.startDate}
+              endDate={this.props.endDate}
+              selected={this.props.endDate}
               onChange={this.handleEndDateChange.bind(this)}/>
             <TimePicker
-              selectedHour={this.state.endHour}
+              selectedHour={this.props.endHour}
               onChangeHour={this.handleEndHourChange.bind(this)}/>
           </div>
         </div>
@@ -110,5 +112,14 @@ class SearchForm extends Component {
     );
   }
 }
+
+SearchForm.propTypes = {
+  location: PropTypes.string.isRequired,
+  startDate: PropTypes.object.isRequired,
+  endDate: PropTypes.object.isRequired,
+  startHour: PropTypes.string.isRequired,
+  endHour: PropTypes.string.isRequired,
+  onAction: PropTypes.func.isRequired
+};
 
 export default SearchForm;
