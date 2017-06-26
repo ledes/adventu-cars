@@ -10,18 +10,18 @@ import '../styles/geosuggest.scss'
 
 class SearchForm extends Component {
 
-  handleLocationChange(location) {
+  handleDestinationChange(destination) {
     let payload = {
-      action: "LOCATION_CHANGED",
-      value: location
+      action: "DESTINATION_CHANGED",
+      value: destination
     };
     this.props.onAction(payload);
   }
 
-  onSuggestLocationSelect(location) {
+  onSuggestDestinationSelect(destination) {
     let payload = {
-      action: "LOCATION_CHANGED",
-      value: location.gmaps.formatted_address
+      action: "DESTINATION_CHANGED",
+      value: destination.gmaps.formatted_address
     };
     this.props.onAction(payload);
   }
@@ -42,17 +42,17 @@ class SearchForm extends Component {
     this.props.onAction(payload);
   }
 
-  handleStartHourChange(hour) {
+  handlePickUpTimeChange(hour) {
     let payload = {
-      action: "START_HOUR_CHANGED",
+      action: "PICK_UP_TIME_CHANGED",
       value: hour
     };
     this.props.onAction(payload);
   }
 
-  handleEndHourChange(hour) {
+  handleDropOffTimeChange(hour) {
     let payload = {
-      action: "END_HOUR_CHANGED",
+      action: "DROP_OFF_TIME_CHANGED",
       value: hour
     };
     this.props.onAction(payload);
@@ -67,13 +67,13 @@ class SearchForm extends Component {
   render() {
     return (
       <div className="form-group">
-        <div className="location-group">
+        <div className="dest-group">
           <label>Where</label>
           <Geosuggest
-          initialValue={this.props.location}
+          initialValue={this.props.dest}
           placeholder={'Enter city, airport or address'}
-          onChange={this.handleLocationChange.bind(this)}
-          onSuggestSelect={this.onSuggestLocationSelect.bind(this)}/>
+          onChange={this.handleDestinationChange.bind(this)}
+          onSuggestSelect={this.onSuggestDestinationSelect.bind(this)}/>
         </div>
         <div className="date-group">
           <label>When</label>
@@ -85,8 +85,8 @@ class SearchForm extends Component {
               selected={this.props.startDate}
               onChange={this.handleStartDateChange.bind(this)}/>
             <TimePicker
-              selectedHour={this.props.startHour}
-              onChangeHour={this.handleStartHourChange.bind(this)}/>
+              selectedHour={this.props.pickUpTime}
+              onChangeHour={this.handlePickUpTimeChange.bind(this)}/>
           </div>
         </div>
         <div className="date-group">
@@ -100,8 +100,8 @@ class SearchForm extends Component {
               selected={this.props.endDate}
               onChange={this.handleEndDateChange.bind(this)}/>
             <TimePicker
-              selectedHour={this.props.endHour}
-              onChangeHour={this.handleEndHourChange.bind(this)}/>
+              selectedHour={this.props.dropOffTime}
+              onChangeHour={this.handleDropOffTimeChange.bind(this)}/>
           </div>
         </div>
         <div className="submit"
@@ -114,11 +114,11 @@ class SearchForm extends Component {
 }
 
 SearchForm.propTypes = {
-  location: PropTypes.string.isRequired,
+  dest: PropTypes.string.isRequired,
   startDate: PropTypes.object.isRequired,
   endDate: PropTypes.object.isRequired,
-  startHour: PropTypes.string.isRequired,
-  endHour: PropTypes.string.isRequired,
+  pickUpTime: PropTypes.string.isRequired,
+  dropOffTime: PropTypes.string.isRequired,
   onAction: PropTypes.func.isRequired
 };
 
