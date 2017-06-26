@@ -29,9 +29,10 @@ class CarList extends Component {
     );
   }
 }
-export default CarList;
 
 CarList.propTypes = {
   cars: PropTypes.arrayOf(PropTypes.object).isRequired,
   errors: PropTypes.arrayOf(PropTypes.string).isRequired
 };
+
+export default CarList;

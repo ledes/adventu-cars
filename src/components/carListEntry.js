@@ -29,8 +29,9 @@ class CarListEntry extends Component {
     );
   }
 }
-export default CarListEntry;
 
 CarListEntry.propTypes = {
   car: PropTypes.object.isRequired
 };
+
+export default CarListEntry;

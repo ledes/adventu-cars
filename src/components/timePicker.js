@@ -25,7 +25,7 @@ class TimePicker extends Component {
       <select className='selectHour'
               value={this.props.selectedHour}
               onChange={this.onTimeChanged.bind(this)}>
-          {this.renderOptions()}
+        {this.renderOptions()}
       </select>
     );
   }

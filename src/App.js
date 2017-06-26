@@ -45,9 +45,6 @@ class App extends Component {
         let params = _.pickBy(this.state, (value, key) => {
           return _.includes(paramKeys, key);
         });
-        if (this.state.cars.length > 0) {
-          this.setState({ cars: [], errors: []});
-        }
         this.findCars(params);
         break;
       default:
@@ -60,7 +57,7 @@ class App extends Component {
     const apiKey = process.env.REACT_APP_HOTWIRE_API_KEY;
     const format = 'jsonp';
     const formattedUrl = this.formatUrl(url, { ...params, format, apiKey });
-    this.setState({ loading: true });
+    this.setState({ loading: true, cars: [], errors: [] });
     $.ajax({
       url: formattedUrl,
       type: 'GET',

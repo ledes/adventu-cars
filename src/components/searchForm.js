@@ -70,7 +70,6 @@ class SearchForm extends Component {
     return props.dest !== '' && props.endDate !== '' && !props.loading;
   }
 
-
   // Render
 
   render() {
