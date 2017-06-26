@@ -6,7 +6,9 @@ import Geosuggest from 'react-geosuggest';
 import TimePicker from '../components/timePicker';
 import '../styles/search-form.scss';
 import 'react-datepicker/dist/react-datepicker.css';
-import '../styles/geosuggest.scss'
+import '../styles/geosuggest.scss';
+let _ = require('lodash');
+
 
 class SearchForm extends Component {
 
@@ -74,6 +76,8 @@ class SearchForm extends Component {
 
   render() {
     let submitClass = this.canSubmit() ? '' : 'block-submit';
+    var starDate = _.cloneDeep(this.props.startDate);
+    var minEndDate = starDate.add(1, 'days');
     return (
       <div className="form-group">
         <div className="dest-group">
@@ -103,7 +107,7 @@ class SearchForm extends Component {
           <div>
             <DatePicker
               placeholderText="mm/dd/yy"
-              minDate={this.props.startDate}
+              minDate={minEndDate}
               startDate={this.props.startDate}
               endDate={this.props.endDate}
               selected={this.props.endDate}
