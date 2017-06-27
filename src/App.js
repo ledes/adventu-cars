@@ -125,6 +125,7 @@ class App extends Component {
         deepLink: car.DeepLink,
         dailyRate: car.DailyRate,
         totalPrice: car.TotalPrice,
+        carTypeName: meta.CarTypeName,
         possibleModels: meta.PossibleModels,
         typicalSeating: meta.TypicalSeating
       };

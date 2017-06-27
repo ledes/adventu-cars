@@ -7,7 +7,10 @@ class CarListEntry extends Component {
     return (
       <div className="car-info">
         <div className="sub-row">
-          <h3>{this.props.car.possibleModels}</h3>
+          <div className="titles">
+            <h3>{this.props.car.carTypeName}</h3>
+            <p>{this.props.car.possibleModels}</p>
+          </div>
           <div className="link-column">
             <a href={this.props.car.deepLink} target='_blank' rel="noopener noreferrer">
             <i className="fa fa-link" aria-hidden="true"></i>
