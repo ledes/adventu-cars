@@ -12,22 +12,23 @@ Some of the libraries and APIs used for this app:
 
 #### Approach
   For this app I decided to use ES6 and React as my main resources.
-  After thinking about how to build the project and writing down the desired features, I built component by component having the state in the parent component and passing the state through the props of each component.
+  After thinking about how to build the project and writing down the desired features, I built it component by component with the state in the parent component and passing the state through the props of each component.
 
 
-  I decided to don't use Redux for this application because I thought it was overkill for this small project and it would have taken more time to implement. Having said that, I think Redux is a brilliant solution for managing the state in a react app.
+  I decided not to use Redux for this application because I thought it was overkill for this project of this size and it would have taken more time to implement. Having said that, I think Redux is a brilliant solution for managing the state in a react app.
 
 
-  For the style I decided to use Sass since it helps to organize the css code.
+  For the style, I decided to use Sass since it helps organize the css code.
 
 
-  Regarding to the `destination input`, I thought that using the Google API would avoid errors trying to find a wrong location.
+  Regarding to the `destination input`, I thought that using the Google API would avoid errors when trying to find a location.
 
 
   For some features I have used external addons to save development time. This creates dependencies and some of them could be avoided by building those features from scratch.
 
 #### Issues
-  * There is a warning when enter a location in development. This is due to the add-on `geosuggest`. There is already a pull request for this([link](https://github.com/ubilabs/react-geosuggest/pull/330)). In a real life application It would be more convenient to implement the google API without using an add-on for this.
+  * There is a warning when entering a location in development. This is due to the addon `geosuggest`. There is already a pull request for this ([link](https://github.com/ubilabs/react-geosuggest/pull/330)). In a real life application It would be more convenient to implement the google API without using an add-on for this.
+
 
   * The current documentation for Hotwire’s Shopping API could specify better how to format the parameters. One example of this would be the format of the dates, following the documentation the dates should be like this example: `&enddate=01/23/2010`. The API doesn't accept this format, instead I had to used encodeURIComponent to format the parameters in a way that they API accepts (`&enddate=01%2F23%2F2010`).
 
@@ -36,7 +37,7 @@ Some of the libraries and APIs used for this app:
   * Add a spinner gif that will be displayed while the API call is being made.
   * Ask Hotwire for the different errors that the API could produce and adapt them to the UI for a better user experience.
   * Change react favicon for a custom one.
-  * Update geosuggest once warning issue is solved.
+  * Update geosuggest version once warning issue is solved.
   * Email Hotwire’s Shopping API regarding to the documentation.
   * Improve styling of carListEntries.
 
