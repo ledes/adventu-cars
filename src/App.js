@@ -93,12 +93,12 @@ class App extends Component {
   formatErrors(response) {
     let errors = [];
     let defaultErrorMessage = 'Something went wrong, please try again later';
-    if (_.isObject(response.Errors)) {
-      errors.push(response.Errors.Error.ErrorMessage);
-    } else if (_.isArray(response.Errors)) {
+    if (_.isArray(response.Errors)) {
       _.forEach(response.Errors, error => {
-        errors.push(error.Error.ErrorMessage);
+        errors.push(error.ErrorMessage);
       });
+    } else if (_.isObject(response.Errors)) {
+      errors.push(response.Errors.Error.ErrorMessage);
     } else {
       errors.push(defaultErrorMessage);
     }

@@ -83,10 +83,10 @@ class SearchForm extends Component {
         <div className="dest-group">
           <label>Where</label>
           <Geosuggest
-          initialValue={this.props.dest}
-          placeholder={'Enter city, airport or address'}
-          onChange={this.handleDestinationChange.bind(this)}
-          onSuggestSelect={this.onSuggestDestinationSelect.bind(this)}/>
+            initialValue={this.props.dest}
+            placeholder={'Enter city, airport or address'}
+            onChange={this.handleDestinationChange.bind(this)}
+            onSuggestSelect={this.onSuggestDestinationSelect.bind(this)}/>
         </div>
         <div className="date-group">
           <label>When</label>
